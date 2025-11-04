@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}How It Works - TimeCapsule{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title">How It Works</h1>
+        <p class="page-subtitle">Creating a time capsule is simple and takes just a few minutes</p>
+    </div>
+</div>
+
+<section class="steps-section">
+    <div class="container">
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-number">1</div>
+                <div class="timeline-content">
+                    <h3>Enable Notifications</h3>
+                    <p>Allow browser notifications so we can notify you when your time capsule is ready. This uses cutting-edge Service Worker technology to deliver notifications even when the browser is closed.</p>
+                    <div class="timeline-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-number">2</div>
+                <div class="timeline-content">
+                    <h3>Create Your Account</h3>
+                    <p>Sign up with a username, email, and password. Your account keeps all your time capsules secure and organized in one place.</p>
+                    <div class="timeline-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-number">3</div>
+                <div class="timeline-content">
+                    <h3>Create Your Capsule</h3>
+                    <p>Add your message, and optionally include audio recordings, photos, or videos. Choose any date and time in the future when you want to receive it.</p>
+                    <div class="timeline-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-number">4</div>
+                <div class="timeline-content">
+                    <h3>Seal & Wait</h3>
+                    <p>Your capsule is sealed and scheduled. You'll see a countdown timer showing exactly how long until it opens. The capsule will be automatically deleted after opening.</p>
+                    <div class="timeline-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-number">5</div>
+                <div class="timeline-content">
+                    <h3>Receive Notification</h3>
+                    <p>At the scheduled time, you'll receive a browser notification. Click it to view your message from the past. Even if you've closed your browser or turned off your computer, you'll get notified when you return!</p>
+                    <div class="timeline-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-explanation">
+            <h2>How Notifications Work</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>Service Workers</h3>
+                    <p>We use browser Service Workers that run in the background, independent of the web page. This allows notifications to be delivered even when the browser is closed.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>Local Scheduling</h3>
+                    <p>Your capsule schedule is stored both on our servers and in your browser's local storage, ensuring reliability and redundancy.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>Cross-Session Persistence</h3>
+                    <p>When you reopen Chrome, the Service Worker checks for any pending notifications and delivers them immediately if the time has passed.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h2>Ready to Try It?</h2>
+            <p>Create your first time capsule now and experience the magic of receiving a message from your past self.</p>
+            {% if user.is_authenticated %}
+                <a href="/dashboard/" class="btn btn-primary btn-large">Go to Dashboard</a>
+            {% else %}
+                <a href="#" class="btn btn-primary btn-large" onclick="showAuthModal('register')">Get Started Free</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script>
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+    });
+</script>
+{% endblock %}

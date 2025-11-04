@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TimeCapsule - Send Messages to Your Future{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">⏰</span>
+                <span class="logo-text">TimeCapsule</span>
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/how-it-works/" class="nav-link">How It Works</a>
+                {% if user.is_authenticated %}
+                    <a href="/dashboard/" class="nav-link">Dashboard</a>
+                    <a href="/logout/" class="nav-link nav-btn">Logout</a>
+                {% else %}
+                    <a href="#" class="nav-link nav-btn" onclick="showAuthModal('login')">Login</a>
+                    <a href="#" class="nav-link nav-btn-primary" onclick="showAuthModal('register')">Sign Up</a>
+                {% endif %}
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TimeCapsule</h3>
+                    <p>Send messages to your future self</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="/">Home</a>
+                    <a href="/how-it-works/">How It Works</a>
+                    <a href="/dashboard/">Dashboard</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TimeCapsule. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="glitch" data-text="TimeCapsule">TimeCapsule</span>
+        </h1>
+        <p class="hero-subtitle">Send messages, memories, and media to your future self</p>
+        <div class="hero-buttons">
+            {% if user.is_authenticated %}
+                <a href="/dashboard/" class="btn btn-primary btn-large">Go to Dashboard</a>
+            {% else %}
+                <a href="#" class="btn btn-primary btn-large" onclick="showAuthModal('register')">Get Started Free</a>
+            {% endif %}
+            <a href="/how-it-works/" class="btn btn-secondary btn-large">Learn More</a>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div class="mouse">
+            <div class="wheel"></div>
+        </div>
+        <div class="arrow">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<section class="features-section">
+    <div class="container">
+        <h2 class="section-title">Why Choose TimeCapsule?</h2>
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3>Schedule for Future</h3>
+                <p>Set exact date and time when you want to receive your message</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </div>
+                <h3>Smart Notifications</h3>
+                <p>Get notified even if browser is closed - powered by service workers</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h3>Rich Media Support</h3>
+                <p>Add text, audio, photos, and videos to your time capsule</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h3>Secure & Private</h3>
+                <p>Your memories are encrypted and completely private</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Send a Message to Your Future?</h2>
+            <p class="cta-subtitle">Create your first time capsule in less than 2 minutes</p>
+            {% if not user.is_authenticated %}
+                <a href="#" class="btn btn-primary btn-large" onclick="showAuthModal('register')">Get Started Now</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAuthModal()">&times;</span>
+        
+        <div id="loginForm" class="auth-form">
+            <h2>Welcome Back</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <input type="text" id="login-username" class="form-input" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" class="form-input" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <p class="auth-switch">Don't have an account? <a href="#" onclick="switchAuth('register')">Sign up</a></p>
+        </div>
+
+        <div id="registerForm" class="auth-form" style="display: none;">
+            <h2>Create Account</h2>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <input type="text" id="reg-username" class="form-input" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="reg-email" class="form-input" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="reg-password" class="form-input" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="#" onclick="switchAuth('login')">Login</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/home.js"></script>
+{% endblock %}
